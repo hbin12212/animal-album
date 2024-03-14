@@ -19,8 +19,8 @@ export default function Content({ $app, initialState }) {
         this.$target.innerHTML = this.template();
     };
 
-    this.setState = (nextState) => {
-        this.state = nextState;
+    this.setState = (newState) => {
+        this.state = newState;
         this.render();
     };
 

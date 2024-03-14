@@ -1,11 +1,11 @@
-import TabBar from './TabBar.js';
-import Content from './Content.js';
+import TabBar from './components/TabBar.js';
+import Content from './components/Content.js';
 
-import { request } from './api.js';
+import { request } from './components/api.js';
 
 export default function App($app) {
     this.state = {
-        animal: 'all',
+        currentTab: 'all',
         photos: [],
     };
 
@@ -16,8 +16,8 @@ export default function App($app) {
         onClick: async (name) => {
             this.setState({
                 ...this.state,
-                animal: name,
-                photos: await request(name),
+                currentTab: name,
+                photos: await request(name === 'all' ? '' : name),
             });
         },
     });
@@ -26,9 +26,9 @@ export default function App($app) {
     const content = new Content({ $app, initialState: [] });
 
     //state
-    this.setState = (nextState) => {
-        this.state = nextState;
-        tab.setState(this.state.animal);
+    this.setState = (newState) => {
+        this.state = newState;
+        tab.setState(this.state.currentTab);
         content.setState(this.state.photos);
     };
 

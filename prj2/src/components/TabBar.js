@@ -7,7 +7,7 @@ export default function TabBar({ $app, initialState, onClick }) {
     this.onClick = onClick;
 
     this.template = () => {
-        let temp = `<div class="clicked" id="all">전체</div>
+        let temp = `<div id="all">전체</div>
        <div id="penguin">펭귄</div><div id="koala">코알라</div><div id="panda">판다</div>`;
 
         return temp;
@@ -15,20 +15,21 @@ export default function TabBar({ $app, initialState, onClick }) {
 
     this.render = () => {
         this.$target.innerHTML = this.template();
-        const $test = this.$target.querySelectorAll('div');
-        $test.forEach((elm) => {
+
+        let $currentTab = document.getElementById(this.state);
+        $currentTab && ($currentTab.className = 'clicked');
+
+        const $tabBar = this.$target.querySelectorAll('div');
+
+        $tabBar.forEach((elm) => {
             elm.addEventListener('click', () => {
-                if (elm.id === 'all') {
-                    onClick();
-                } else {
-                    onClick(elm.id);
-                }
+                onClick(elm.id);
             });
         });
     };
 
-    this.setState = (nextState) => {
-        this.state = nextState;
+    this.setState = (newState) => {
+        this.state = newState;
         this.render();
     };
 
