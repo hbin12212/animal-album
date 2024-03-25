@@ -12,7 +12,7 @@ export default function App($app) {
     //tab
     const tab = new TabBar({
         $app,
-        initialState: [],
+        initialState: '',
         onClick: async (name) => {
             this.setState({
                 ...this.state,
@@ -34,13 +34,10 @@ export default function App($app) {
 
     const init = async () => {
         try {
+            const initialPhotos = await request();
             this.setState({
                 ...this.state,
-            });
-            const animalData = await request();
-            this.setState({
-                ...this.state,
-                photos: animalData,
+                photos: initialPhotos,
             });
         } catch (error) {
             console.log(error);
