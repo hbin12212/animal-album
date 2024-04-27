@@ -26,8 +26,8 @@ export default function App($app) {
     };
 
     this.updateContent = async (tabName) => {
+        console.log(tabName);
         const name = tabName === 'all' ? '' : tabName;
-        console.log(this.state);
 
         const photos = await request(name);
         this.setState({
@@ -37,13 +37,12 @@ export default function App($app) {
         });
     };
 
-    // popstate 이벤트로 브라우저 내비게이션을 처리
     window.addEventListener('popstate', () => {
+        console.log(window.location.pathname);
         this.updateContent(window.location.pathname.replace('/', '') || 'all');
     });
 
     const init = async () => {
-        console.log(this.state);
         this.updateContent(this.state.currentTab);
     };
 

@@ -14,8 +14,6 @@ export default function TabBar({ $app, initialState, onClick }) {
     };
 
     this.render = () => {
-        console.log(window.location.pathname);
-
         this.$target.innerHTML = this.template();
 
         let $currentTab = document.getElementById(this.state);
