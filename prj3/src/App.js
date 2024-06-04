@@ -12,7 +12,7 @@ export default function App($app) {
         $app,
         initialState: this.state.currentTab,
         onClick: async (name) => {
-            history.pushState(null, null, name); // URL 변경
+            history.pushState(null, null, `/${name}`); // URL 변경
             this.updateContent(name);
         },
     });
@@ -33,12 +33,11 @@ export default function App($app) {
         this.setState({
             ...this.state,
             currentTab: tabName,
-            photos,
+            photos: photos,
         });
     };
 
     window.addEventListener('popstate', () => {
-        console.log(window.location.pathname);
         this.updateContent(window.location.pathname.replace('/', '') || 'all');
     });
 
