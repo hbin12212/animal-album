@@ -7,10 +7,24 @@ import CityDetail from './components/CityDetail.js';
 import { request } from './components/api.js';
 
 export default function App($app) {
+    const getSortBy = () => {
+        if (window.location.search) {
+            return window.location.search.split('sort=')[1].split('&')[0];
+        }
+        return 'total';
+    };
+
+    const getSearchWord = () => {
+        if (window.location.search && window.location.search.includes('search=')) {
+            return window.location.search.split('search=')[1];
+        }
+        return '';
+    };
+
     this.state = {
         startIdx: 0,
-        sortBy: '',
-        searchWord: '',
+        sortBy: getSortBy(),
+        searchWord: getSearchWord(),
         region: '',
         cities: '',
     };
@@ -68,6 +82,7 @@ export default function App($app) {
 
     this.setState = (newState) => {
         this.state = newState;
+        header.setState({ sortBy: this.state.sortBy, searchWord: this.state.searchWord });
         cityList.setState(this.state.cities);
     };
 
