@@ -1,7 +1,7 @@
 const API_URL = 'https://animal-api-two.vercel.app/';
 
 const $content = document.querySelector('div.content');
-let template = [];
+let template = "";
 
 //API
 const getData = async (name) => {
